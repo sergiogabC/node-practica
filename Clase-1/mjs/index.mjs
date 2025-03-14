@@ -1,0 +1,1 @@
+import { sumar,dividir,multiplicar,restar} from "./operaciones.mjs";

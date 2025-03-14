@@ -1,0 +1,16 @@
+{
+  "name": "practica",
+  "version": "1.0.0",
+  "main": "1.servidorNativo.js",
+  "scripts": {
+    "dev:1": "node --watch ./1.servidorNativo.js",
+    "dev:2": "node --watch ./2.express.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "4.21.2",
+    "practica": "file:"
+  }
+}

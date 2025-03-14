@@ -1,0 +1,15 @@
+{
+  "name": "clase-2",
+  "version": "1.0.0",
+  "main": "2.routing.js",
+  "scripts": {
+    "dev:3": "node --watch 3.express.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "clase-2": "file:",
+    "express": "4.21.2"
+  }
+}
