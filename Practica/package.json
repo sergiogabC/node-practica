@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "1.servidorNativo.js",
   "scripts": {
-    "dev:1": "node --watch ./1.servidorNativo.js",
-    "dev:2": "node --watch ./2.express.js"
+    "dev:1": "node --watch 1.servidorNativo.js",
+    "dev:2": "node --watch 2.express.js",
+    "dev:3": "node --watch 3.rutasExpress.js"
   },
   "author": "",
   "license": "ISC",
