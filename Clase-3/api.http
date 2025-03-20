@@ -20,3 +20,11 @@ Content-Type: application/json
     "genre": ["Comedy"],
     "rate": 9.3
 }
+
+###Actualizar una pelicula
+PATCH http://localhost:1234/movie/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+Content-Type: application/json
+
+{
+    "title":"HOLA"
+}
