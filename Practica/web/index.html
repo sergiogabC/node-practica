@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: auto;
+            height: 100%;
+            display: flex;
+        }
+
+        article {
+            padding: auto;
+            margin: 10px;
+            display: block;
+            justify-content: center;
+        }
+
+        h2 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: xx-large;
+        }
+
+        .listaAmigos {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: large;
+            display: inline-block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .divEliminar {
+            display: inline-block;
+            margin-left: 30px
+        }
+    </style>
+    <script type="module">
+        fetch("http://localhost:1234/perfiles")
+            .then(res => res.json())
+            .then(perfiles => {
+                const html = perfiles.map(perfil => {
+                    console.log(perfil.id)
+                    let amigos = perfil.amigos
+                    let nameAmigos = [amigos[0].name, amigos[1].name, amigos[2].name]
+                    console.log(nameAmigos)
+                    return `
+                        <article data-id="${perfil.id}">
+                            <h2>Nombre de Usuario: ${perfil.nombre}</h2>
+                            <h4 class="listaAmigos">Amigos: ${nameAmigos} </h4>
+                            <div class="divEliminar">
+                                <button class="eliminarAmigos">Eliminar Amigo</button>
+                            </div>
+                            <p>${perfil.telefono}</p>
+                            <button class="eliminarUsuario">Eliminar Usuario</button>
+                        </article >
+                    `
+                }).join("")
+                document.querySelector("main").innerHTML = html
+
+                document.addEventListener('click', e => {
+                    if (e.target.matches('.eliminarUsuario')) {
+                        const article = e.target.closest('article')
+                        const id = article.dataset.id;
+
+                        fetch(`http://localhost:1234/perfiles/${id}`, {
+                            method: 'DELETE'
+                        })
+                            .then(res => {
+                                if (res.ok) {
+                                    article.remove()
+                                    console.log(id, 'eliminado')
+                                }
+                            })
+                    }
+                })
+
+                document.addEventListener('click', e => {
+                    if (e.target.matches('.eliminarAmigo')) {
+                        const article = e.target.closest('article')
+                        const id = article.dataset.id;
+
+                        fetch(`http://localhost:1234/perfiles/${id}`, {
+                            method: 'DELETE'
+                        })
+                            .then(res => {
+                                if (res.ok) {
+                                    article.remove()
+                                    console.log(id, 'eliminado')
+                                }
+                            })
+                    }
+                })
+
+            })
+    </script>
+</head>
+
+<body>
+    <main></main>
+</body>
+
+</html>
