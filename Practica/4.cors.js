@@ -21,7 +21,7 @@ app.get("/perfiles", (req, res) => {
 app.delete("/perfiles/:id", (req, res) => {
   const { id } = req.params;
   const perfilIndex = perfiles.findIndex((perfil) => perfil.id === id);
-  console.log(perfilIndex);
+  console.log("Indice del Perfil ", perfilIndex);
   if (perfilIndex === -1) {
     return res.status(404).json("MOVIE NOT FOUND");
   }
@@ -33,12 +33,20 @@ app.delete("/perfiles/:id", (req, res) => {
 app.delete("/perfiles/:id/:idAmigo", (req, res) => {
   const { id } = req.params;
   const { idAmigo } = req.params;
+
   const perfilIndex = perfiles.findIndex((perfil) => perfil.id === id);
-  const amigos = perfiles[perfilIndex].amigos[idAmigo];
 
-  console.log(amigos);
+  const amigos = perfiles[perfilIndex].amigos;
+  const amigoIndex = amigos.findIndex((amigo) => amigo.id == idAmigo);
 
-  res.status(200).json("Movie Deleted");
+  console.log("Indice del amigo: ", amigoIndex);
+
+  if (amigoIndex === -1) {
+    return res.status(404).json("Amigo Not Found");
+  }
+
+  perfiles[perfilIndex].amigos.splice(amigoIndex, 1);
+  res.status(200).json(amigos);
 });
 
 app.listen(PORT, () => {
