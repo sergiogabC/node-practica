@@ -54,22 +54,38 @@
             .then(res => res.json())
             .then(perfiles => {
                 const perfilesAR = perfiles.map(perfil => {
-                    console.log(perfil.id)
+                    console.log("Id de la persona: ", perfil.id)
                     let amigos = perfil.amigos
+                    console.log("Array de amigos: ", amigos)
+                    let htmlAmigos = ``
+                    if (amigos.length === 0) {
+                        htmlAmigos = `<span class="spanH">Sin amigos</span>`
+                    }
+                    if (amigos.length > 0) {
+                        let articleAmigos = amigos.map(amigo => {
+                            return `<article class="articleAm" data-id="${amigo.id}">${amigo.name}</article>`
+                        }).join("")
+                        console.log("article amigos: ", articleAmigos)
+                        htmlAmigos = `
+                        
+                            <span class="spanH"> Amigos: </span>
+                            
+                            <div class="amigo">
+                                ${articleAmigos}
+                            </div>
+
+                             <div class="divEliminar">
+                                <button class="eliminarAmigos">Eliminar Amigo</button>
+                            </div>
+                        `
+                    }
                     return `
                         <article class="perfil" data-id="${perfil.id}">
                             <h2>Nombre de Usuario: ${perfil.nombre}</h2>
                             <h4 class="listaAmigos">
-                                <span class="spanH"> Amigos: </span>
-                                <div class="amigo">
-                                    <article class="articleAm" data-id="${amigos[0].id}">${amigos[0].name}</article>
-                                    <article class="articleAm" data-id="${amigos[1].id}">${amigos[1].name}</article>
-                                    <article class="articleAm" data-id="${amigos[2].id}">${amigos[2].name}</article>
-                                </div>                                
+                             ${htmlAmigos}
                             </h4>
-                            <div class="divEliminar">
-                                <button class="eliminarAmigos">Eliminar Amigo</button>
-                            </div>
+                           
                             <p>${perfil.telefono}</p>
                             <button class="eliminarUsuario">Eliminar Usuario</button>
                         </article >
@@ -94,27 +110,40 @@
                     }
                 })
 
-                document.addEventListener('click', e => {
-                    const articlePerfil = e.target.closest('.perfil')
-                    const id = articlePerfil.dataset.id
-                    const article = e.target.closest('article')
-                    const idAmigo = article.dataset.id;
-                    if (e.target.matches('.articleAm')) {
-                        article.style.background = "blue"
+                let articlePerfil, id, article, idAmigo;
 
+                document.addEventListener('click', e => {
+
+                    if (e.target.matches('.articleAm')) {
+                        articlePerfil = e.target.closest('.perfil')
+                        id = articlePerfil.dataset.id
+                        article = e.target.closest('.articleAm')
+                        idAmigo = article.dataset.id;
+                        console.log("id amigo: ", idAmigo)
+
+                        if (article.style.background === "blue") {
+                            article.style.background = "white"
+                        } else {
+                            article.style.background = "blue"
+                        }
                     }
-                    // if () {
-                    //     fetch(`http://localhost:1234/perfiles/${id}/${idAmigo}`, {
-                    //         method: 'DELETE'
-                    //     })
-                    //         .then(res => {
-                    //             if (res.ok) {
-                    //                 article.remove()
-                    //                 console.log(idAmigo, 'eliminado')
-                    //             }
-                    //         })
-                    // }
+                    console.log("Antes de eliminar amigos: ", idAmigo)
+
+                    if (e.target.matches('.eliminarAmigos')) {
+                        fetch(`http://localhost:1234/perfiles/${id}/${idAmigo}`, {
+                            method: 'DELETE'
+                        })
+                            .then(res => {
+                                if (res.ok) {
+                                    article.remove()
+                                    console.log(idAmigo, 'eliminado')
+                                }
+                            })
+                    }
+
                 })
+
+
 
             })
     </script>
