@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SergiCl</title>
     <style>
         body {
             width: auto;
@@ -39,6 +39,7 @@
 
         .articleAm {
             display: inline-block;
+            margin: 5px;
         }
 
         .amigo {
@@ -74,8 +75,8 @@
                                 ${articleAmigos}
                             </div>
 
-                             <div class="divEliminar">
-                                <button class="eliminarAmigos">Eliminar Amigo</button>
+                             <div class="divEliminar" >
+                                <button data-id="${perfil.id}" class="eliminarAmigos">Eliminar Amigo</button>
                             </div>
                         `
                     }
@@ -111,6 +112,7 @@
                 })
 
                 let articlePerfil, id, article, idAmigo;
+                let listaId = [];
 
                 document.addEventListener('click', e => {
 
@@ -123,26 +125,51 @@
 
                         if (article.style.background === "blue") {
                             article.style.background = "white"
+                            listaId.splice(listaId.findIndex(e => e === idAmigo), 1)
                         } else {
                             article.style.background = "blue"
+                            listaId.push({ idP: id, idA: idAmigo })
                         }
+                        console.log("lista id: ", listaId)
                     }
-                    console.log("Antes de eliminar amigos: ", idAmigo)
 
-                    if (e.target.matches('.eliminarAmigos')) {
-                        fetch(`http://localhost:1234/perfiles/${id}/${idAmigo}`, {
-                            method: 'DELETE'
-                        })
-                            .then(res => {
-                                if (res.ok) {
-                                    article.remove()
-                                    console.log(idAmigo, 'eliminado')
-                                }
-                            })
-                    }
 
                 })
 
+                document.addEventListener('click', e => {
+
+                    if (e.target.matches('.eliminarAmigos') && listaId.length === 0) {
+                        return
+                    }
+
+                    if (e.target.matches('.eliminarAmigos')) {
+
+                        const idBoton = e.target.closest('.eliminarAmigos').dataset.id
+                        console.log('id boton: ', idBoton)
+
+                        console.log("listaid en eliminar amigos", listaId)
+                        Promise.all(listaId.map(ele => {
+
+                            return fetch(`http://localhost:1234/perfiles/${id}/${ele.idA}`, { method: 'DELETE' })
+                                .then(res => res.ok ? { idP: ele.idP, idA: ele.idA } : null)
+
+                        }))
+                            .then(eliminados => {
+
+                                console.log("eliminados:", eliminados)
+                                document.querySelectorAll('.articleAm').forEach(article => {
+
+                                    if (idBoton == eliminados.idP) {
+                                        article.remove()
+                                    }
+
+                                })
+                            })
+                            .catch(error => console.error("Error aliminando amigos: ", error))
+
+                    }
+
+                })
 
 
             })
