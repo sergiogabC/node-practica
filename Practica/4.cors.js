@@ -7,26 +7,8 @@ const depurarPerfiles = require("./4.cors/depurarPerfiles");
 const perfiles = depurarPerfiles(redSocialData);
 
 app.disable("x-powered-by");
-app.use(express.json());
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      const ACCEPTED_ORIGINS = [
-        "http://localhost:8080",
-        "http://localhost:1234",
-        "http://192.168.222:8080",
-      ];
-      if (ACCEPTED_ORIGINS.includes(origin)) {
-        return callback(null, true);
-      }
-      if (!origin) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not Allowed by cors"));
-    },
-  })
-);
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json(redSocialData);
