@@ -21,10 +21,13 @@ Content-Type: application/json
     "rate": 9.3
 }
 
+### Borrar pelicula
+DELETE http://localhost:1234/movies/5ad1a235-0d9c-410a-b32b-220d91689a08
+
 ###Actualizar una pelicula
-PATCH http://localhost:1234/movie/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+PATCH http://localhost:1234/movies/241bf55d-b649-4109-af7c-0e6890ded3fc
 Content-Type: application/json
 
 {
-    "title":"HOLA"
+    "year":2022
 }
