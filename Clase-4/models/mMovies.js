@@ -1,5 +1,4 @@
 import { randomUUID } from "node:crypto";
-import { readJson } from "../utils/readJson.js";
 
 import movies from "../json/movies.json" with {type: 'json'}
 
