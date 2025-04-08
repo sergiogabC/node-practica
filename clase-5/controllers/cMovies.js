@@ -1,4 +1,4 @@
-import { MovieModel } from "../models/local-file-system/mMovies.js";
+import { MovieModel } from "../models/mysql/movie.js";
 import {
   validateMovie,
   validatePartialMovie,
