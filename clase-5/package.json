@@ -1,0 +1,20 @@
+{
+  "name": "clase-4",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:app": "node --watch app.js"
+  },
+  "author": "ser",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "clase-4": "file:",
+    "cors": "2.8.5",
+    "express": "4.21.2",
+    "mongodb": "^6.15.0",
+    "zod": "3.24.2"
+  }
+}
