@@ -7,7 +7,7 @@ USE moviesdb;
 
 CREATE TABLE movies(
 	id BINARY(16) PRIMARY KEY DEFAULT(UUID_TO_BIN(UUID())),
-    title VARCHAR(225) NOT NULL,
+    title VARCHAR(225) UNIQUE NOT NULL,
     year INT NOT NULL,
     director VARCHAR(225) NOT NULL,
     duration INT NOT NULL,

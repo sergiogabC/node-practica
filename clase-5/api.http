@@ -2,32 +2,34 @@
 GET http://localhost:1234/movies
 
 ###Recuperar pelicula por id
-GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+GET http://localhost:1234/movies/8e736ade-1487-11f0-bdc1-008cfa3b65c2
 
 ###Recuperar todas las películas por un género
-GET http://localhost:1234/movies?genre=Action 
+GET http://localhost:1234/movies?genre=DRama 
 
 ###Crear un pelicula con POST
 POST http://localhost:1234/movies
 Content-Type: application/json
 
 {
-    "title": "Asu Mare",
-    "year": 2013,
-    "director": "Ricardo Maldonado",
-    "duration": 100,
-    "poster": "https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcR7-DeW42mj9_IqQ3lnJbYexZ2YLdE-StT6h0IAgbuqgC4IoE2Y4gtf-CBPAhGjINtAeCJyTLETZddvMF0K",
-    "genre": ["Comedy"],
-    "rate": 9.3
+"title": "Asu Mare",
+"year": 2013,
+"director": "Ricardo Maldonado",
+"duration": 100,
+"poster": "https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcR7-DeW42mj9_IqQ3lnJbYexZ2YLdE-StT6h0IAgbuqgC4IoE2Y4gtf-CBPAhGjINtAeCJyTLETZddvMF0K",
+"genre": ["Comedy", "Drama"],
+"rate": 9.3
 }
 
 ### Borrar pelicula
-DELETE http://localhost:1234/movies/5ad1a235-0d9c-410a-b32b-220d91689a08
-
-###Actualizar una pelicula
-PATCH http://localhost:1234/movies/241bf55d-b649-4109-af7c-0e6890ded3fc
+DELETE http://localhost:1234/movies/af5157ac-1a07-11f0-a4a6-008cfa3b65c2
+###
+PATCH http://localhost:1234/movies/9bbb6cb3-1a09-11f0-a4a6-008cfa3b65c2
 Content-Type: application/json
 
 {
-    "year":2022
+    "title": "Asu Mare",
+    "year":2013,
+    "rate":9.3,
+    "duration": 100
 }

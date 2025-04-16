@@ -1,15 +1,19 @@
 import { Router } from "express";
-
 import { MovieController } from "../controllers/cMovies.js";
 
-export const moviesRouter = Router();
+export const createMovieRouter = ({ movieModel }) => {
+  const moviesRouter = Router();
+  const movieController = new MovieController({ movieModel });
 
-//Por tener async await deberia estar envuelto en un try catch, pero se manejaria de mejor forma en el middleware
-moviesRouter.get("/", MovieController.getAll);
-moviesRouter.get("/:id", MovieController.getById);
+  //Por tener async await deberia estar envuelto en un try catch, pero se manejaria de mejor forma en el middleware
+  moviesRouter.get("/", movieController.getAll);
+  moviesRouter.get("/:id", movieController.getById);
 
-moviesRouter.delete("/:id", MovieController.delete);
+  moviesRouter.delete("/:id", movieController.delete);
 
-moviesRouter.post("/", MovieController.create);
+  moviesRouter.post("/", movieController.create);
 
-moviesRouter.patch("/:id", MovieController.update);
+  moviesRouter.patch("/:id", movieController.update);
+
+  return moviesRouter;
+};
