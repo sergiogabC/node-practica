@@ -32,6 +32,7 @@ INSERT INTO genres(name) VALUES
 ('Crime'),
 ('Adventure'),
 ('Sci-Fi'),
+('Comedy'),
 ('Romance');
 
 INSERT INTO movies(id, title, year, director, duration, poster, rate) VALUES

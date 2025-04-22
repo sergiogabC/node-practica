@@ -1,0 +1,5 @@
+###
+Get http://localhost:1234/articulos
+
+###
+GET http://localhost:1234/articulos/titulos
