@@ -52,6 +52,7 @@ VALUES
 
 SELECT BIN_TO_UUID(movie_id) movie_id, genre_id FROM movie_genres;
 
+SELECT * FROM movies
 
 
 

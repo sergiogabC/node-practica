@@ -1,5 +1,14 @@
 ###
-Get http://localhost:1234/articulos
+GET http://localhost:1234/articulos
+
+###
+GET http://localhost:1234/articulos?tipo=investigacion-cientifICA
+
+###
+GET http://localhost:1234/articulos?titulo
 
 ###
 GET http://localhost:1234/articulos/titulos
+
+###
+GET http://localhost:1234/articulos/2024-10
